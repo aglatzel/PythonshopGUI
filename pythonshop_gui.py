@@ -10,7 +10,13 @@ def zapisz():
     save_path = filedialog.asksaveasfilename(initialdir = "/", title = "Select file", filetypes = (("JPG","*.jpg"),("Wszystkie pliki","*.*")))
     save_path+=".jpg"
     obraz.save(save_path)
-
+    
+def czarnobialy():
+    global obraz
+    obraz = obraz.convert("L")
+    photo_space.image=ImageTk.PhotoImage(obraz)
+    photo_space.configure(image=photo_space.image)
+    
 root=Tk()
 root.title("Pythonshop")
 root.geometry("1200x600")
@@ -30,7 +36,7 @@ photo_space.grid(column=0, rowspan=6)
 sidebar=Frame(root, width=100).grid(column=1)
 obroc_sidebar=Button(sidebar, text="Obróć").grid(row=0, column=1, sticky="nesw")
 skaluj_sidebar=Button(sidebar, text="Skaluj").grid(row=1, column=1, sticky="nesw")
-czarno_bialy_sidebar=Button(sidebar, text="Czarno-biały").grid(row=2, column=1, sticky="nesw")
+czarno_bialy_sidebar=Button(sidebar, text="Czarno-biały", command=czarnobialy).grid(row=2, column=1, sticky="nesw")
 spacer_sidebar=Frame(sidebar, height=300).grid(row=3, column=1, sticky="nesw")
 
 obraz_path=filedialog.askopenfilename(initialdir = "/", title = "Wybierz plik", filetypes = (("JPG","*.jpg"),("Wszystkie pliki","*.*")))
